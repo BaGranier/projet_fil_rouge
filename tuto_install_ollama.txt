@@ -1,0 +1,214 @@
+Voici un **tuto clair, simple et complet** pour installer **Ollama** sous **Linux** puis **Windows**, destiné à tes camarades.
+Tu peux le mettre directement dans votre dépôt GitHub ou dans vos slides.
+
+---
+
+# 🚀 **TUTO INSTALLATION OLLAMA (Linux & Windows)**
+
+Ollama est le moteur qui vous permet de faire tourner des LLM localement (comme Qwen, Llama 3, Mistral…)
+C’est indispensable pour notre pipeline LLM → bottleneck → XGBoost.
+
+---
+
+# 🟩 **1. Installation sous Linux (Ubuntu / Debian / Mint)**
+
+### ✔️ Prérequis
+
+* Avoir **curl**
+* Avoir **sudo**
+* Avoir au moins **4–8 Go RAM** selon le modèle que vous voulez utiliser
+
+Vérifier :
+
+```bash
+curl --version
+```
+
+---
+
+## 🧰 **Étape 1 : installation**
+
+Lancer simplement :
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Cette commande :
+
+* télécharge Ollama
+* installe les binaires dans `/usr/local/bin`
+* active le service systemd
+
+---
+
+## 🧪 **Étape 2 : vérifier l’installation**
+
+```bash
+ollama --version
+```
+
+Vous devez obtenir quelque chose comme :
+
+```
+ollama version 0.1.xx
+```
+
+---
+
+## 🚀 **Étape 3 : lancer le serveur Ollama**
+
+Dans un terminal :
+
+```bash
+ollama serve
+```
+
+Vous devez voir :
+
+```
+Listening on 127.0.0.1:11434
+```
+
+➡️ **Laissez ce terminal ouvert**, il sert le modèle à Python.
+
+---
+
+## 📦 **Étape 4 : télécharger un premier modèle**
+
+Le modèle le plus léger pour tester :
+
+```bash
+ollama pull qwen:0.5b
+```
+
+Ou un modèle plus costaud :
+
+```bash
+ollama pull llama3:instruct
+```
+
+Vérifier les modèles installés :
+
+```bash
+ollama list
+```
+
+---
+
+## 🧪 **Étape 5 : test rapide**
+
+```bash
+ollama run qwen:0.5b "Bonjour, résume ce qu'est le blé tendre."
+```
+
+Si ça répond → Ollama est bien installé.
+
+---
+
+# 🟦 **2. Installation sous Windows**
+
+👉 Ollama fonctionne **directement sous Windows** depuis décembre 2024.
+
+---
+
+## 🧰 **Étape 1 : Télécharger l’installateur Windows**
+
+Lien officiel :
+[https://ollama.com/download](https://ollama.com/download)
+
+Choisir : **“Ollama for Windows (.exe)”**
+
+---
+
+## 🚀 **Étape 2 : Installation**
+
+Double-cliquez sur l’installeur → Suivre les étapes.
+
+Cela va :
+
+* installer Ollama dans Windows
+* configurer le service en arrière-plan
+* ajouter le binaire au PATH
+
+---
+
+## 🧪 **Étape 3 : Tester dans PowerShell**
+
+Ouvrir PowerShell :
+
+```powershell
+ollama --version
+```
+
+Puis tester un modèle :
+
+```powershell
+ollama pull qwen:0.5b
+ollama run qwen:0.5b "Qu'est-ce que le maïs grain ?"
+```
+
+Normalement, vous aurez une réponse immédiate.
+
+---
+
+## 💡 Bonus Windows : utiliser Ollama dans WSL2
+
+Si vous travaillez déjà dans Linux via WSL2 :
+
+1. Installez Ollama côté Windows (pas dans WSL direct)
+2. Installez l’extension WSL :
+
+```bash
+curl -fsSL https://ollama.com/download/ollama-wsl.sh | sh
+```
+
+Cela permet à WSL2 de communiquer avec Ollama tournant côté Windows.
+
+---
+
+# 🟧 **3. Problèmes fréquents**
+
+### ❌ "connection refused"
+
+→ le serveur n’est pas lancé
+→ il faut faire :
+
+```bash
+ollama serve
+```
+
+### ❌ "model not found"
+
+→ il n’a pas été téléchargé :
+
+```bash
+ollama pull qwen:0.5b
+```
+
+### ❌ "not in PATH"
+
+→ sur Windows, fermer/reouvrir PowerShell
+→ ou redémarrer la session
+
+---
+
+# 🟩 **4. Résumé rapide (pour diapo)**
+
+**Linux :**
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve
+ollama pull qwen:0.5b
+ollama run qwen:0.5b "Bonjour"
+```
+
+**Windows :**
+
+* télécharger l’exe sur ollama.com
+* installer → ouvrir PowerShell
+
+```powershell
+ollama pull qwen:0.5b
+ollama run qwen:0.5b "Bonjour"
